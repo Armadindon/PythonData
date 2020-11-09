@@ -31,8 +31,7 @@ if __name__ == "__main__":
     for commune in communesReader:
         if previousDept != commune["code_departement"]:
             previousDept = commune["code_departement"]
-            print("On s'occupe du département:",commune["nom_departement"],end="")
-        print(".", end="")
+            print("On s'occupe du département:",commune["nom_departement"])
         deptDataRequest = requests.get("https://www.interieur.gouv.fr/Elections/Les-resultats/Presidentielles/elecresult__presidentielle-2017/(path)/presidentielle-2017/"+ formatNumberOfChar(commune["code_region"],3) +"/"+ formatNumberOfChar(commune["code_departement"],3) +"/"+ formatNumberOfChar(commune["code_commune_INSEE"],6) +".html")
 
         resultItem = {
