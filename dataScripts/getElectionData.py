@@ -12,7 +12,7 @@ if __name__ == "__main__":
     communesReader = DictReader(fileCommunes)
 
     fields = [
-        "code_insee","nom",
+        "code_insee","nom", "parti_gagnant",
         "votes_MLEPEN","pourcentage_inscrit_MLEPEN","pourcentage_exprime_MLEPEN",
         "votes_EMACRON","pourcentage_inscrit_EMACRON","pourcentage_exprime_EMACRON",
         "votes_JLMELENCHON","pourcentage_inscrit_JLMELENCHON","pourcentage_exprime_JLMELENCHON",
@@ -56,13 +56,21 @@ if __name__ == "__main__":
 
         treeDept = html.fromstring(deptDataRequest.content.decode("utf-8"))
         resultatsVote = treeDept.xpath('//table[@class="table table-bordered tableau-resultats-listes"][2]/tbody/tr') #On veut les résultats du second tour
+        partiGagnant = ("",-1)
         #On construit la map avec les résultats
         for resultByCandidate in resultatsVote:
             dataByCandidate = list(resultByCandidate.xpath("./td/text()"))
+
+            if partiGagnant[1] < int(dataByCandidate[1].replace(" ","")):
+                partiGagnant = (partiByCandidate[dataByCandidate[0]][0], int(dataByCandidate[1].replace(" ","")))
+            
             resultItem["votes_" +partiByCandidate[dataByCandidate[0]][1]] = int(dataByCandidate[1].replace(" ",""))
             resultItem["pourcentage_inscrit_" +partiByCandidate[dataByCandidate[0]][1]] = float(dataByCandidate[2].replace(",","."))
             resultItem["pourcentage_exprime_" +partiByCandidate[dataByCandidate[0]][1]] = float(dataByCandidate[3].replace(",","."))
         
+        resultItem["parti_gagnant"] = partiGagnant[0]
+        print(partiGagnant)
+
         if not all(x in resultItem.keys() for x in fields):
             print("Problèmes de données !", resultItem,)
             print("Il manque", list(filter(lambda x: x not in resultItem.keys(), fields)),"\n")
