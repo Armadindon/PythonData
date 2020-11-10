@@ -69,7 +69,6 @@ if __name__ == "__main__":
             resultItem["pourcentage_exprime_" +partiByCandidate[dataByCandidate[0]][1]] = float(dataByCandidate[3].replace(",","."))
         
         resultItem["parti_gagnant"] = partiGagnant[0]
-        print(partiGagnant)
 
         if not all(x in resultItem.keys() for x in fields):
             print("Problèmes de données !", resultItem,)
