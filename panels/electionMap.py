@@ -3,16 +3,19 @@ import dash_core_components as dcc
 import dash_html_components as html
 import plotly.express as px
 import pandas as pd
+import geopandas as gpd
 import json
 
 def formatNumberOfChar(code, requiredLen):
     return "0"*(requiredLen-len(code)) + str(code)
 
 def panel(dataset):
-    jsonData = open("data/communes.geojson","r")
-    jsonString = jsonData.read()
-    locations = json.loads(jsonString)
-    jsonData.close()
+    #jsonData = open("data/communes.geojson","r")
+    #jsonString = jsonData.read()
+    #locations = json.loads(jsonString)
+    #jsonData.close()
+
+    locations = gpd.read_file("data/communes.geojson")
 
     partiByCandidate = {
         "Front National" : "#0D378A",
@@ -33,11 +36,20 @@ def panel(dataset):
     mapPanel = px.choropleth_mapbox(
         dataset,
         geojson=locations,
+        color="parti_gagnant",
+        color_discrete_map=partiByCandidate,
         featureidkey="properties.code",
         locations="code_insee", 
         mapbox_style="open-street-map",
+        hover_name="nom",
+        hover_data={
+            "code_insee" : False,
+        },
+        labels={"parti_gagnant" : "Parti en tête"},
         center={"lat": 46.227638, "lon": 2.213749},
         zoom=3,
-        title="Résultats des votes à l'élections de 2017 par commune"
+        title="Résultats des votes à l'élections de 2017 par commune",
         )
+
+    mapPanel.update_layout(height= 900)
     return mapPanel
