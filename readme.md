@@ -16,3 +16,15 @@ python3 dataScripts/getElectionData.py
 
 **Attention :** Ce script récupère une grande quantité de données, il faut par conséquent avoir une connexion stable tout au long de l'éxécution de celui-ci, de plus, le temps d'éxécution peut être très lent.
 
+Pour adapter les données des geoJson departements a notre programme, lancez le script simplifyGeoJson.py avec la commande:
+```shell
+python3 dataScripts/simplifyGeoJson.py
+```
+
+## Sources :
+  -[Résultats de l'élection](https://www.interieur.gouv.fr/Elections/Les-resultats/Presidentielles/elecresult__presidentielle-2017/(path)/presidentielle-2017/index.html)
+  -[Liste des départements Français](https://www.data.gouv.fr/fr/datasets/departements-de-france/)
+  -[GeoJson de france](https://github.com/gregoiredavid/france-geojson)
+  -[Revenus fiscaux par commune](#)
+
+
