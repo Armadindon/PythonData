@@ -10,12 +10,8 @@ def formatNumberOfChar(code, requiredLen):
     return "0"*(requiredLen-len(code)) + str(code)
 
 def panel(dataset):
-    #jsonData = open("data/communes.geojson","r")
-    #jsonString = jsonData.read()
-    #locations = json.loads(jsonString)
-    #jsonData.close()
 
-    locations = gpd.read_file("data/communes.geojson")
+    locations = gpd.read_file("data/departements.geojson")
 
     partiByCandidate = {
         "Front National" : "#0D378A",
@@ -31,7 +27,7 @@ def panel(dataset):
         "Union Populaire Républicaine" : "#118088"
     }
 
-    dataset["code_insee"] = dataset["code_insee"].apply(lambda x : formatNumberOfChar(str(x),5)) #On met au format 5 chiffres pour la liaison avec le geoJSON
+    dataset["code_departement"] = dataset["code_departement"].apply(lambda x : formatNumberOfChar(str(x),2)) #On met au format 5 chiffres pour la liaison avec le geoJSON
 
     mapPanel = px.choropleth_mapbox(
         dataset,
@@ -39,11 +35,11 @@ def panel(dataset):
         color="parti_gagnant",
         color_discrete_map=partiByCandidate,
         featureidkey="properties.code",
-        locations="code_insee", 
+        locations="code_departement", 
         mapbox_style="open-street-map",
-        hover_name="nom",
+        hover_name="nom_departement",
         hover_data={
-            "code_insee" : False,
+            "code_departement" : False,
         },
         labels={"parti_gagnant" : "Parti en tête"},
         center={"lat": 46.227638, "lon": 2.213749},

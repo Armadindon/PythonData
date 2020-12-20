@@ -15,7 +15,7 @@ app = dash.Dash(__name__)
 
 # assume you have a "long-form" data frame
 # see https://plotly.com/python/px-arguments/ for more options
-dataset = pd.read_csv("data/votes_communes.csv",dtype={"code_insee":str})
+dataset = pd.read_csv("data/votes_departements.csv")
 
 
 app.layout = html.Div(children=[
