@@ -19,6 +19,21 @@ def loadDept(code):
         result = json.load(f)
     return result
 
+def getBaseLayout(map):
+    return [
+        dcc.Graph(
+            id="electionMap",
+            figure=map
+            )
+    ]
+
+def getDeptView(panel1,panel2):
+    return [
+        dcc.Graph(panel1),
+        dcc.Graph(panel2)
+    ]
+    
+
 app = dash.Dash(__name__, prevent_initial_callbacks=True)
 
 #On Load les datasets
@@ -37,20 +52,18 @@ chloropethMap = ChloroMap(dataset,datasetCity,locations,cityLocations)
 #On gère les callbacks
 deptSelected = "-1"
 
-app.layout = html.Div(children=[
-    html.H1(children='Hello Dash'),
+app.layout = html.Div(id="body", children=[
+    html.Div(id="navbar",children=[
+        html.Ul(children=[
+            html.Li("Carte de France", className="selected" , id="cdf-button"),
+            html.Li("Info du département" , id="idd-button"),
+            html.Li("Info de la ville", id="idv-button")
+        ])
+    ]),
 
-    html.P(id='placeholder'),
-
-    html.Div(children='''
-        Dash: A web application framework for Python.
-    '''),
-    
-    dcc.Graph(
-        id="electionMap",
-        figure=chloropethMap.mapPanel,
-    )
+    html.Div(id="App", children=getBaseLayout(chloropethMap.mapPanel))
 ])
+
 
 @app.callback(
     Output("electionMap", "figure"),
@@ -68,6 +81,32 @@ def update_map(data):
     chloropethMap.generateMap()
 
     return chloropethMap.mapPanel
+
+
+@app.callback(
+    [
+        Output("App","children"),
+        Output("cdf-button","className"),
+        Output("idd-button","className"),
+        Output("idv-button","className"),
+    ],
+    [
+        Input("cdf-button","n_clicks"),
+        Input("idd-button","n_clicks"),
+        Input("idv-button","n_clicks")
+    ]
+)
+def changeTab(n1 ,n2 ,n3):
+    srcInput = dash.callback_context.triggered[0]["prop_id"]
+
+    if "cdf-button" in srcInput:
+        return (getBaseLayout(chloropethMap.mapPanel), "selected", "", "")
+    elif "idd-button" in srcInput:
+        return ([], "", "selected", "")
+    elif "idv-button" in srcInput:
+        return ([], "", "", "selected")
+
+    print(n1,n2,n3)
 
 
 if __name__ == '__main__':

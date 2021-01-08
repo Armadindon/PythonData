@@ -1,0 +1,57 @@
+body {margin: 0;}
+
+#body{
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    font-family: 'Roboto', sans-serif;
+}
+  
+#navbar{
+    display: flex;
+    background: rgb(0,1,36);
+    background: linear-gradient(180deg, rgba(0,1,36,1) 0%, rgba(255,255,255,1) 50%, rgba(255,0,0,1) 100%);
+    width: 300px;
+    height: 100%;
+    box-shadow: 8px 0px 2px 1px rgba(0, 0, 255, .2);
+    justify-content: center;
+    flex-direction: column;
+}
+
+#navbar > ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+li {
+    padding: 20px;
+    width: 100%;
+    animation: backDisappear 0.5s forwards;
+    cursor: default;
+}
+
+.selected {
+    color: gray;
+}
+
+li:hover:not(.selected) {
+    animation: backAppear 0.5s forwards;
+    cursor: pointer;
+}
+
+@keyframes backDisappear{
+    from {background-color: rgba(255,255,255,0.3);}
+    to {background-color: rgba(255,255,255,0);}
+}
+
+@keyframes backAppear{
+    from {background-color: rgba(255,255,255,0);}
+    to {background-color: rgba(255,255,255,0.3);}
+}
+
+#App{
+    margin-left: 15px;
+    width: 100%;
+}
+
