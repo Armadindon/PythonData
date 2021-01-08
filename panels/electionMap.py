@@ -20,8 +20,8 @@ class ChloroMap:
     def generateMap(self):
 
         partiByCandidate = {
-            "Front National" : "#0D378A",
             "En Marche" : "#ffeb00",
+            "Front National" : "#0D378A",
             "La France Insoumise" : "#cc2443",
             "Les Républicains" : "#0066CC",
             "Debout la France" : "#0082C4",
@@ -54,8 +54,7 @@ class ChloroMap:
         
         if len(self.cityLocations) != 0:
             print("Y'a des villes à afficher !")
-            self.mapPanel.add_trace(
-                px.choropleth_mapbox(
+            layer = px.choropleth_mapbox(
                     self.datasetByCity,
                     geojson=self.cityLocations,
                     color="parti_gagnant",
@@ -71,8 +70,12 @@ class ChloroMap:
                     },
                     labels={"parti_gagnant" : "Parti en tête"},
                     height=900
-                ).data[0]
-            )
+                )
+            
+            for data in layer.data:
+                self.mapPanel.add_trace(
+                    data
+                )
 
         self.mapPanel.update_layout(clickmode="event")
 
