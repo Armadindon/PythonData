@@ -36,21 +36,21 @@ for file in sorted(filter(lambda x: x.endswith(".xls") ,os.listdir(os.path.join(
                 resultDepts.append({
                     "code_departement": dept,
                     "nom_departement": lineData[3].value,
-                    "nbFoyerFiscaux": lineData[5].value,
-                    "revFiscalRefFoyers": lineData[6].value,
-                    "impotNet": lineData[7].value,
-                    "nbFoyersImposes": lineData[8].value,
-                    "revFiscalRefFoyersImpos": lineData[9].value
+                    "nbFoyerFiscaux": lineData[5].value if lineData[5].value != "n.c." else "",
+                    "revFiscalRefFoyers": lineData[6].value if lineData[6].value != "n.c." else "",
+                    "impotNet": lineData[7].value if lineData[7].value != "n.c." else "",
+                    "nbFoyersImposes": lineData[8].value if lineData[8].value != "n.c." else "",
+                    "revFiscalRefFoyersImpos": lineData[9].value if lineData[9].value != "n.c." else ""
                 })
             else:
                 results.append({
                     "code_ville": dept + lineData[2].value,
                     "nom_commune": lineData[3].value,
-                    "nbFoyerFiscaux": lineData[5].value,
-                    "revFiscalRefFoyers": lineData[6].value,
-                    "impotNet": lineData[7].value,
-                    "nbFoyersImposes": lineData[8].value,
-                    "revFiscalRefFoyersImpos": lineData[9].value
+                    "nbFoyerFiscaux": lineData[5].value if lineData[5].value != "n.c." else "",
+                    "revFiscalRefFoyers": lineData[6].value if lineData[6].value != "n.c." else "",
+                    "impotNet": lineData[7].value if lineData[7].value != "n.c." else "",
+                    "nbFoyersImposes": lineData[8].value if lineData[8].value != "n.c." else "",
+                    "revFiscalRefFoyersImpos": lineData[9].value if lineData[9].value != "n.c." else ""
                 })
 
 with open(os.path.join(os.getcwd(), "data", "revenuFiscauxDepts.csv"), "w+") as f:

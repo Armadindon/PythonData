@@ -53,5 +53,9 @@ li:hover:not(.selected) {
 #App{
     margin-left: 15px;
     width: 100%;
+    overflow-y: scroll;
 }
 
+.hide{
+    display: none;
+}
