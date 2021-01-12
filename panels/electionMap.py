@@ -53,7 +53,6 @@ class ChloroMap:
             )
         
         if len(self.cityLocations) != 0:
-            print("Y'a des villes à afficher !")
             layer = px.choropleth_mapbox(
                     self.datasetByCity,
                     geojson=self.cityLocations,
