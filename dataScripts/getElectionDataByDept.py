@@ -3,12 +3,13 @@
 import requests
 from lxml import html
 from csv import DictReader, DictWriter
+import os
 
 def formatNumberOfChar(code, requiredLen):
     return "0"*(requiredLen-len(code)) + str(code)
 
 if __name__ == "__main__":
-    fileDept = open("data/departements.csv")
+    fileDept = open(os.path.join('data', 'departements.csv'))
     deptReader = DictReader(fileDept)
 
     fields = [
@@ -78,7 +79,7 @@ if __name__ == "__main__":
         results.append(resultItem)
 
     print("On enregistre les données")
-    with open("data/votes_departements.csv","w+",newline="") as csvData:
+    with open(os.path.join('data', 'votes_departements.csv'),"w+",newline="") as csvData:
 
         writer = DictWriter(csvData, fieldnames=fields)
         

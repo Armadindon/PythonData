@@ -106,14 +106,15 @@ def generateSynthesis(datasetVoteDept, datasetVoteCity, datasetWealthDept, datas
 app = dash.Dash(__name__, prevent_initial_callbacks=True)
 
 #On Load les datasets
-dataset = pd.read_csv("data/votes_departements.csv", dtype={"code_departement" : str})
-datasetCity = pd.read_csv("data/votes_communes.csv", dtype={"code_insee" : str})
 
-datasetWealth = pd.read_csv("data/revenuFiscauxDepts.csv", dtype={"code_departement" : str, "revFiscalRefFoyers" : float})
-datasetWealthCity = pd.read_csv("data/revenuFiscauxCommunes.csv", dtype={"code_ville" : str, "revFiscalRefFoyers" : float})
+dataset = pd.read_csv(os.path.join("data","votes_departements.csv"), dtype={"code_departement" : str})
+datasetCity = pd.read_csv(os.path.join("data","votes_communes.csv"), dtype={"code_insee" : str})
+
+datasetWealth = pd.read_csv(os.path.join("data","revenuFiscauxDepts.csv"), dtype={"code_departement" : str, "revFiscalRefFoyers" : float})
+datasetWealthCity = pd.read_csv(os.path.join("data","revenuFiscauxCommunes.csv"), dtype={"code_ville" : str, "revFiscalRefFoyers" : float})
 
 baseLocations = []
-with open("data/departements.geojson","r") as f:
+with open(os.path.join("data","departements.geojson"),"r") as f:
     baseLocations = json.load(f)
 
 locations = baseLocations.copy()
@@ -187,7 +188,6 @@ def update_map(data):
         links.append(html.Li("Info de la ville", id="idv-button", className="hide"))
     
     links.append(html.Li("Synthèse de l'analyse", id="synth-button"))
-    print(deptSelected, citySelected, links)
 
     return (chloropethMap.mapPanel, links)
 

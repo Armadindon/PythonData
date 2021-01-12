@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-
+import os
 from csv import writer
 
 def append_missing_cities(file, city):
@@ -13,6 +13,6 @@ Marseille=[13055,'MARSEILLE',13000,'MARSEILLE','',43.2755155435,5.42681101081,21
 Lyon=[69123,'LYON',69000,'LYON','',45.7699284397,4.82922464978,381,'','Lyon','Lyon',69,'Rhône',84,'Auvergne-Rhône-Alpes']
 Paris=[75056,'PARIS',75000,'PARIS','',48.8626304852,2.33629344655,101,'','Paris','Paris',75,'Paris',11,'Île-de-France']
 
-append_missing_cities('data/communes.csv', Marseille)
-append_missing_cities('data/communes.csv', Lyon)
-append_missing_cities('data/communes.csv', Paris)
+append_missing_cities(os.path.join('data', 'communes.csv'), Marseille)
+append_missing_cities(os.path.join('data', 'communes.csv'), Lyon)
+append_missing_cities(os.path.join('data', 'communes.csv'), Paris)

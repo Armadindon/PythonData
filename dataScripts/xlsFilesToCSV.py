@@ -17,8 +17,8 @@ def conversionNumDept(codeDept):
 results = []
 resultDepts = []
 
-for file in sorted(filter(lambda x: x.endswith(".xls") ,os.listdir(os.path.join(os.getcwd(), "data", "RevenusFiscaux")))):
-    wb = xlrd.open_workbook(os.path.join(os.getcwd(), "data", "RevenusFiscaux", file))
+for file in sorted(filter(lambda x: x.endswith(".xls") ,os.listdir(os.path.join("data", "RevenusFiscaux")))):
+    wb = xlrd.open_workbook(os.path.join("data", "RevenusFiscaux", file))
     started = False
     sheet = wb.sheets()[0]
     dept = conversionNumDept(file.replace(".xls",""))
@@ -53,13 +53,13 @@ for file in sorted(filter(lambda x: x.endswith(".xls") ,os.listdir(os.path.join(
                     "revFiscalRefFoyersImpos": lineData[9].value if lineData[9].value != "n.c." else ""
                 })
 
-with open(os.path.join(os.getcwd(), "data", "revenuFiscauxDepts.csv"), "w+") as f:
+with open(os.path.join("data", "revenuFiscauxDepts.csv"), "w+") as f:
     fields = ["code_departement", "nom_departement", "nbFoyerFiscaux", "revFiscalRefFoyers", "impotNet", "nbFoyersImposes", "revFiscalRefFoyersImpos"]
     writer = csv.DictWriter(f, fields)
     writer.writeheader()
     writer.writerows(resultDepts)
 
-with open(os.path.join(os.getcwd(), "data", "revenuFiscauxCommunes.csv"), "w+") as f:
+with open(os.path.join("data", "revenuFiscauxCommunes.csv"), "w+") as f:
     fields = ["code_ville", "nom_commune", "nbFoyerFiscaux", "revFiscalRefFoyers", "impotNet", "nbFoyersImposes", "revFiscalRefFoyersImpos"]
     writer = csv.DictWriter(f, fields)
     writer.writeheader()
