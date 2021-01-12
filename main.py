@@ -102,7 +102,8 @@ def generateSynthesis(datasetVoteDept, datasetVoteCity, datasetWealthDept, datas
     ]
     
 
-app = dash.Dash(__name__, prevent_initial_callbacks=True)
+dash_app = dash.Dash(__name__, prevent_initial_callbacks=True)
+app = dash_app.server
 
 #On Load les datasets
 
@@ -130,7 +131,7 @@ cityVotePie = VotePie(datasetCity)
 deptSelected = "-1"
 citySelected = "-1"
 
-app.layout = html.Div(id="body", children=[
+dash_app.layout = html.Div(id="body", children=[
     html.Div(id="navbar",children=[
         html.Ul(id="links", children=[
             html.Li("Carte de France", className="selected" , id="cdf-button"),
@@ -144,7 +145,7 @@ app.layout = html.Div(id="body", children=[
 ])
 
 
-@app.callback(
+@dash_app.callback(
     [Output("electionMap", "figure"), Output("links", "children")],
     [Input("electionMap","clickData")]
 )
@@ -191,7 +192,7 @@ def update_map(data):
     return (chloropethMap.mapPanel, links)
 
 
-@app.callback(
+@dash_app.callback(
     [
         Output("App","children"),
         Output("cdf-button","className"),
@@ -256,4 +257,4 @@ def changeTab(n1 ,n2 ,n3, n4):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    dash_app.run_server(debug=True)
