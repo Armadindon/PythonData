@@ -1,5 +1,4 @@
 import plotly.express as px
-import plotly
 
 class VoteHistogram:
 

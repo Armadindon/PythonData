@@ -1,12 +1,4 @@
-import dash
-import dash_core_components as dcc
-import dash_html_components as html
-import dash_leaflet as dl
-import dash_leaflet.express as dlx
 import plotly.express as px
-import pandas as pd
-import geopandas as gpd
-import json
 
 def formatNumberOfChar(code, requiredLen):
     return "0"*(requiredLen-len(code)) + str(code)

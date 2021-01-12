@@ -8,7 +8,7 @@ import os
 def formatNumberOfChar(code, requiredLen):
     return "0"*(requiredLen-len(code)) + str(code)
 
-if __name__ == "__main__":
+def main():
     fileCommunes = open(os.path.join('data', 'communes.csv'))
     communesReader = DictReader(fileCommunes)
 
@@ -88,3 +88,7 @@ if __name__ == "__main__":
 
     
     fileCommunes.close()
+
+
+if __name__ == "__main__":
+    main()
