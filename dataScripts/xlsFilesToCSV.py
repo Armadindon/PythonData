@@ -53,13 +53,13 @@ def main():
                         "revFiscalRefFoyersImpos": lineData[9].value if lineData[9].value != "n.c." else ""
                     })
 
-    with open(os.path.join("data", "revenuFiscauxDepts.csv"), "w+") as f:
+    with open(os.path.join("data", "revenuFiscauxDepts.csv"), "w+", encoding='utf-8') as f:
         fields = ["code_departement", "nom_departement", "nbFoyerFiscaux", "revFiscalRefFoyers", "impotNet", "nbFoyersImposes", "revFiscalRefFoyersImpos"]
         writer = csv.DictWriter(f, fields)
         writer.writeheader()
         writer.writerows(resultDepts)
 
-    with open(os.path.join("data", "revenuFiscauxCommunes.csv"), "w+") as f:
+    with open(os.path.join("data", "revenuFiscauxCommunes.csv"), "w+", encoding='utf-8') as f:
         fields = ["code_ville", "nom_commune", "nbFoyerFiscaux", "revFiscalRefFoyers", "impotNet", "nbFoyersImposes", "revFiscalRefFoyersImpos"]
         writer = csv.DictWriter(f, fields)
         writer.writeheader()

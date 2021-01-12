@@ -79,7 +79,7 @@ def main():
         results.append(resultItem)
 
     print("On enregistre les données")
-    with open(os.path.join('data', 'votes_departements.csv'),"w+",newline="") as csvData:
+    with open(os.path.join('data', 'votes_departements.csv'),"w+",newline="", encoding='utf-8') as csvData:
 
         writer = DictWriter(csvData, fieldnames=fields)
         

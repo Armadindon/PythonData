@@ -4,7 +4,7 @@ import os
 from csv import writer
 
 def append_missing_cities(file, city):
-    with open(file, 'a+') as write_csv:
+    with open(file, encoding='utf-8', mode='a+') as write_csv:
         csv_writer = writer(write_csv)
         csv_writer.writerow(city)
 
