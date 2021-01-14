@@ -1,47 +1,50 @@
+"""
+Script contenant les classes permettant de représenter des Histogrammes
+"""
 import plotly.express as px
 
+
 class VotePie:
+    """
+    Objet représentant un diagramme en camember
+     de résultats d'élections. (Pourcentages de votes)
+    """
 
-    def __init__(self, dataset, currentCity = None, currentDept = None):
-        self.update(dataset, currentCity, currentDept)
-    
+    def __init__(self, dataset, current_city=None, current_dept=None):
+        self.graph = None
+        self.update(dataset, current_city, current_dept)
 
-    def update(self, dataset, currentCity = None, currentDept = None):
+    def update(self, dataset, current_city=None, current_dept=None):
+        """
+        Permet de mette à jour les données d'un objet
+        """
         self.dataset = dataset
-        self.currentCity = currentCity
-        self.currentDept = currentDept
-        self.generatePie()
+        self.current_city = current_city
+        self.current_dept = current_dept
+        self.generate_pie()
 
-    def generatePie(self):
-        if self.currentCity != None:
-            line = self.dataset[self.dataset.code_insee == self.currentCity]
+    def generate_pie(self):
+        """
+        Genère ou regenère le diagramme
+        """
+        if self.current_city is not None:
+            line = self.dataset[self.dataset.code_insee == self.current_city]
             nom = line.nom.item()
 
-        elif self.currentDept != None:
-            line = self.dataset[self.dataset.code_departement == self.currentDept]
+        elif self.current_dept is not None:
+            line = self.dataset[self.dataset.code_departement ==
+                                self.current_dept]
             nom = line.nom_departement.item()
 
         else:
-            return None
+            return
 
-        colorByCandidate = {
-            "Emmanuel Macron" : "#ffeb00",
-            "Marine le Pen" : "#0D378A",
-            "Jean Luc Mélanchon" : "#cc2443",
-            "François Fillon" : "#0066CC",
-            "Nicolas Dupont Aignant" : "#0082C4",
-            "Benoît Hamon" : "#FF8080",
-            "Philippe POUTOU" : "#bb0000",
-            "Nathalie Arthaud" : "#bb0000",
-            "Jean Lassalle" : "#26c4ec",
-            "Jacques Cheminnades" : "#dddddd",
-            "François Asselinau" : "#118088"
-        }
-        
-        x = ["Marine le Pen","Emmanuel Macron","Jean Luc Mélanchon","François Fillon","Nicolas Dupont Aignant",
-        "Benoît Hamon","Philippe POUTOU","Nathalie Arthaud","Jean Lassalle","Jacques Cheminnades","François Asselinau"]
+        axis_x = ["Marine le Pen", "Emmanuel Macron", "Jean Luc Mélanchon",
+                  "François Fillon", "Nicolas Dupont Aignant",
+                  "Benoît Hamon", "Philippe POUTOU", "Nathalie Arthaud",
+                  "Jean Lassalle", "Jacques Cheminnades", "François Asselinau"]
 
-        y = [
+        axis_y = [
             line.pourcentage_exprime_MLEPEN.item(),
             line.pourcentage_exprime_EMACRON.item(),
             line.pourcentage_exprime_JLMELENCHON.item(),
@@ -53,8 +56,10 @@ class VotePie:
             line.pourcentage_exprime_JLASSALLE.item(),
             line.pourcentage_exprime_JCHEMINADE.item(),
             line.pourcentage_exprime_FASSELINEAU.item(),
-           
-        ]
-        self.graph = px.pie(names=x, values=y, color_discrete_map=colorByCandidate)
 
-        self.graph.update_layout(title="Pourcentage des votes exprimes par candidats pour "+nom, xaxis_title_text="Candidats", yaxis_title_text="Pourcentage de votes")
+        ]
+        self.graph = px.pie(names=axis_x, values=axis_y)
+
+        self.graph.update_layout(title="Pourcentage des votes exprimes par candidats pour "+nom,
+                                 xaxis_title_text="Candidats",
+                                 yaxis_title_text="Pourcentage de votes")

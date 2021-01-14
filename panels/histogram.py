@@ -1,33 +1,49 @@
+"""
+Script contenant les classes permettant de représenter des Histogrammes
+"""
 import plotly.express as px
 
+
 class VoteHistogram:
+    """
+    Objet représentant un histogramme de résultats d'élections. (Votes par candidats)
+    """
 
-    def __init__(self, dataset, currentCity = None, currentDept = None):
-        self.update(dataset, currentCity, currentDept)
-    
+    def __init__(self, dataset, current_city=None, current_dept=None):
+        self.graph = None
+        self.update(dataset, current_city, current_dept)
 
-    def update(self, dataset, currentCity = None, currentDept = None):
+    def update(self, dataset, current_city=None, current_dept=None):
+        """
+        Met à jour les données de l'objet
+        """
         self.dataset = dataset
-        self.currentCity = currentCity
-        self.currentDept = currentDept
-        self.generateHistogram()
+        self.current_city = current_city
+        self.current_dept = current_dept
+        self.generate_histogram()
 
-    def generateHistogram(self):
-        if self.currentCity != None:
-            line = self.dataset[self.dataset.code_insee == self.currentCity]
+    def generate_histogram(self):
+        """
+        Genère l'histogramme à partir des données
+        """
+        if self.current_city is not None:
+            line = self.dataset[self.dataset.code_insee == self.current_city]
             nom = line.nom.item()
 
-        elif self.currentDept != None:
-            line = self.dataset[self.dataset.code_departement == self.currentDept]
+        elif self.current_dept is not None:
+            line = self.dataset[self.dataset.code_departement ==
+                                self.current_dept]
             nom = line.nom_departement.item()
 
         else:
-            return None
-        
-        x = ["Marine le Pen","Emmanuel Macron","Jean Luc Mélanchon","François Fillon","Nicolas Dupont Aignant",
-        "Benoît Hamon","Philippe POUTOU","Nathalie Arthaud","Jean Lassalle","Jacques Cheminnades","François Asselinau"]
+            return
 
-        y = [
+        axis_x = ["Marine le Pen", "Emmanuel Macron", "Jean Luc Mélanchon",
+             "François Fillon", "Nicolas Dupont Aignant",
+             "Benoît Hamon", "Philippe POUTOU", "Nathalie Arthaud",
+             "Jean Lassalle", "Jacques Cheminnades", "François Asselinau"]
+
+        axis_y = [
             line.votes_MLEPEN.item(),
             line.votes_EMACRON.item(),
             line.votes_JLMELENCHON.item(),
@@ -39,9 +55,11 @@ class VoteHistogram:
             line.votes_JLASSALLE.item(),
             line.votes_JCHEMINADE.item(),
             line.votes_FASSELINEAU.item(),
-           
+
         ]
-        self.graph = px.histogram(x=x, y=y)
+        self.graph = px.histogram(x=axis_x, y=axis_y)
 
-        self.graph.update_layout(title="Votes pour "+nom, xaxis_title_text="Candidats", yaxis_title_text="Nombre de votes")
-
+        self.graph.update_layout(
+            title="Votes pour "+nom,
+            xaxis_title_text="Candidats",
+            yaxis_title_text="Nombre de votes")
