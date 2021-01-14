@@ -266,9 +266,9 @@ def update_map(data):
 )
 def changeTab(n1, n2, n3, n4):
     global selected_dept, selected_city
-    srcInput = dash.callback_context.triggered[0]["prop_id"]
+    src_input = dash.callback_context.triggered[0]["prop_id"]
 
-    if "cdf-button" in srcInput:
+    if "cdf-button" in src_input:
         return ([
             dcc.Graph(id="electionMap", figure=chloropeth_map.map_panel)
         ],
@@ -277,7 +277,7 @@ def changeTab(n1, n2, n3, n4):
             "" if selected_city != "-1" else "hide",
             ""
         )
-    elif "idd-button" in srcInput:
+    elif "idd-button" in src_input:
         return ([
             html.H1("Résultats par candidat"),
             dcc.Graph(figure=vote_histogram_dept.graph),
@@ -291,7 +291,7 @@ def changeTab(n1, n2, n3, n4):
             "" if selected_city != "-1" else "hide",
             ""
         )
-    elif "idv-button" in srcInput:
+    elif "idv-button" in src_input:
         return ([
             html.H1("Résultats par candidat"),
             dcc.Graph(figure=vote_histogram_city.graph),
@@ -306,7 +306,7 @@ def changeTab(n1, n2, n3, n4):
             ""
         )
 
-    elif "synth-button" in srcInput:
+    elif "synth-button" in src_input:
         return (generate_synthesis(vote_dataset_dept,
                                    vote_dataset_city, wealth_dataset_depts,
                                    wealth_dataset_city),
