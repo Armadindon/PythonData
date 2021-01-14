@@ -3,9 +3,8 @@ Fichier principal, contient toute la partie propre au fonctionnel de
 l'application et du serveur.
 """
 import os
-
-import dash
 import json
+import dash
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
@@ -99,15 +98,15 @@ def generate_synthesis(dataset_vote_dept,
     city_dataset["percentImposable"] = city_dataset.apply(
         lambda x: x["nbFoyersImposes"] / x["nbFoyerFiscaux"] * 100
         if x["nbFoyerFiscaux"] != 0
-        and x["nbFoyersImposes"] != None
-        and x["nbFoyerFiscaux"] != None
+        and x["nbFoyersImposes"] is not None
+        and x["nbFoyerFiscaux"] is not None
         else None, axis=1)
 
     dept_dataset["percentImposable"] = dept_dataset.apply(
         lambda x: x["nbFoyersImposes"] / x["nbFoyerFiscaux"] * 100
         if x["nbFoyerFiscaux"] != 0
-        and x["nbFoyersImposes"] != None
-        and x["nbFoyerFiscaux"] != None
+        and x["nbFoyersImposes"] is not None
+        and x["nbFoyerFiscaux"] is not None
         else None, axis=1)
 
     # On met en relation le pourcentage de personnes imposables et le parti gagnant pour les villes
@@ -201,12 +200,15 @@ dash_app.layout = html.Div(id="body", children=[
     [Input("electionMap", "clickData")]
 )
 def update_map(data):
+    """
+    Callback mettant à jour la map après un click sur un département ou une ville
+    """
     global selected_dept, selected_city
     links = [html.Li("Carte de France", className="selected",
                      id="cdf-button"), ]
-    cityLocations = []
+    city_locations = []
 
-    if data != None and len(data["points"][0]["customdata"][0]) == 2:
+    if data is not None and len(data["points"][0]["customdata"][0]) == 2:
         selected_dept = data["points"][0]["customdata"][0]
 
         # On update les graphs
@@ -216,14 +218,14 @@ def update_map(data):
 
         # On Update la map
         locations = base_locations.copy()
-        cityLocations = load_dept(selected_dept)
+        city_locations = load_dept(selected_dept)
         locations["features"] = list(filter(
             lambda x: not x["properties"]["code"] == selected_dept, locations["features"]))
         chloropeth_map.update(
-            vote_dataset_dept, vote_dataset_city, locations, cityLocations)
+            vote_dataset_dept, vote_dataset_city, locations, city_locations)
         chloropeth_map.generate_map()
 
-    elif data != None:
+    elif data is not None:
         selected_city = data["points"][0]["customdata"][0]
 
         # On update l'histogramme
@@ -264,7 +266,10 @@ def update_map(data):
         Input("synth-button", "n_clicks")
     ]
 )
-def changeTab(n1, n2, n3, n4):
+def change_tab(_n_clicks_1, _n_clicks_2, _n_clicks_3, _n_clicks_4):
+    """
+    Permet de changer d'onglet en cas de clics sur le menu
+    """
     global selected_dept, selected_city
     src_input = dash.callback_context.triggered[0]["prop_id"]
 
@@ -277,7 +282,8 @@ def changeTab(n1, n2, n3, n4):
             "" if selected_city != "-1" else "hide",
             ""
         )
-    elif "idd-button" in src_input:
+
+    if "idd-button" in src_input:
         return ([
             html.H1("Résultats par candidat"),
             dcc.Graph(figure=vote_histogram_dept.graph),
@@ -291,7 +297,8 @@ def changeTab(n1, n2, n3, n4):
             "" if selected_city != "-1" else "hide",
             ""
         )
-    elif "idv-button" in src_input:
+
+    if "idv-button" in src_input:
         return ([
             html.H1("Résultats par candidat"),
             dcc.Graph(figure=vote_histogram_city.graph),
@@ -306,7 +313,7 @@ def changeTab(n1, n2, n3, n4):
             ""
         )
 
-    elif "synth-button" in src_input:
+    if "synth-button" in src_input:
         return (generate_synthesis(vote_dataset_dept,
                                    vote_dataset_city, wealth_dataset_depts,
                                    wealth_dataset_city),
@@ -316,6 +323,7 @@ def changeTab(n1, n2, n3, n4):
                 "selected"
                 )
 
+    return None
 
 if __name__ == '__main__':
     dash_app.run_server(debug=True)
