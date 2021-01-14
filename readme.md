@@ -27,7 +27,7 @@ python3 install.py --full
 ## Sources :
   * [Résultats de l'élection](https://www.interieur.gouv.fr/Elections/Les-resultats/Presidentielles/elecresult__presidentielle-2017/(path)/presidentielle-2017/index.html)
   * [Liste des départements Français](https://www.data.gouv.fr/fr/datasets/departements-de-france/)
-  * [Liste des communes de France]
+  * [Liste des communes de France](https://www.data.gouv.fr/fr/datasets/communes-de-france-base-des-codes-postaux/)
   * [GeoJson de france](https://github.com/gregoiredavid/france-geojson)
   * [Revenus fiscaux par commune](https://www.data.gouv.fr/fr/datasets/l-impot-sur-le-revenu-par-collectivite-territoriale/)
 
