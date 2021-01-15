@@ -1,6 +1,11 @@
-FROM tiangolo/meinheld-gunicorn:python3.8
+FROM python:3.8
 
 COPY . /app/
 
-RUN pip install -r /app/requirements.txt
-RUN cd /app && python install.py
+WORKDIR /app
+RUN pip install -r requirements.txt
+RUN python install.py
+
+RUN chmod +x ./start_server.sh
+
+ENTRYPOINT ["./start_server.sh"]
