@@ -24,15 +24,18 @@ pip install --user -r requirements.txt
 ```shell
 python3 install.py
 ```
+
 ![install](.readme/install_preview.png)
 
 4. Lancez l'application:
 ```shell
 python3 main.py
 ```
+
 ![main](.readme/main_preview.png)
 
 5. Dans votre navigateur web, visiter le lien: http://127.0.0.1:8050/
+
 ![first page](.readme/first_preview.png)
 
 #### Installation complète
@@ -53,12 +56,15 @@ Ceci permet de sauter l'installation complètement et donc tester le projet sur 
 ## Utilisation et navigation
 
 Au lancement de l'application, on a une vue complète du pays et une répartition par département. Mettre la souris sur un département affiche le parti en tête dans celui-ci.
+
 ![depart](.readme/depart_preview.png)
 
 En cliquant, on génère les communes présentes dans ce département. Cette opération prend un peu de temps, le titre de la page devient "Updating..." durant la génération des nouvelles données.
+
 ![com](.readme/comm_preview.png)
 
 On a une nouvelle option à gauche de la carte nommé "Info du département". En cliquant sur celle-ci, on a accès aux résultats par candidats et aux données économiques dans le département choisi. On peut retourner à tout moment en appuyant sur l'option "Carte de France".
+
 ![infodep](.readme/infodep_preview.png) 
 
 En cliquant sur une commune, on peut accéder au "Info de la ville" maintenant disponible à gauche de la carte.

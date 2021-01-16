@@ -20,14 +20,28 @@ from panels.pie import VotePie
 def to_length(code, expected_length):
     """
     Fonction utilitaire afin de mettre une chaine de caractères à
-    la longueur souhaitée en ajoutant des '0' avant
+    la longueur souhaitée en ajoutant des '0' avant.
+
+    Args:
+        code (str): Chaine de caractères à modifier.
+
+        expected_length (int): Entier représentant la longueur souhaité.
+
+    Returns:
+        str:Chaine de caractères modifié.
     """
     return "0"*(expected_length-len(code)) + str(code)
 
 
 def load_dept(code):
     """
-    Charge le geojson d'un departement et renvoie les villes de ce departement
+    Charge le geojson d'un departement et renvoie les villes de ce departement.
+    
+    Args:
+        code (str): Chaine de caractères qui représente le code du département.
+
+    Returns:
+        result(obj): Objet python contenant les villes du département.
     """
     with open(os.path.join("data", "geojsonByDpt", code, "communes.geojson")) as file:
         result = json.load(file)
@@ -37,7 +51,15 @@ def load_dept(code):
 def generate_economic_report(dataset, code_dept=None, code_city=None):
     """
     Genère un "rapport économique" (présentant les différentes données que l'on a pour cet endroit)
-    Que l'on peut afficher dans les onglets
+    Que l'on peut afficher dans les onglets.
+
+    Args:
+        dataset (TextFileReader): Set qui contient les données économiques.
+        code_dept (str): Chaine de caractère qui represente le code du département.
+        code_city (str): Chaine de caractère qui respresente le code de la commune.
+
+    Returns:
+        html.Div: Div html pour le module dash qui represente le rapport économique de l'endroit 
     """
     if code_dept is not None:
         line = dataset[dataset.code_departement == code_dept]
@@ -87,7 +109,13 @@ def generate_economic_report(dataset, code_dept=None, code_city=None):
 def generate_synthesis(dataset_vote_dept,
                        dataset_vote_city, dataset_wealth_dept, dataset_wealth_city):
     """
-    Genère le contenu de l'onglet synthèse
+    Genère le contenu de l'onglet synthèse.
+
+    Args:
+        dataset_vote_dept (TextFileReader): Set qui contient la répartition des votes du département.
+        dataset_vote_city (TextFileReader): Set qui contient la répartition des votes de la commune.
+        dataset_wealth_dept (TextFileReader): Set qui contient les données économiques du département.
+        dataset_wealth_city (TextFileReader): Set qui contient les données économiques de la commune.
     """
     city_dataset = pd.merge(dataset_vote_city, dataset_wealth_city,
                             left_on="code_insee", right_on="code_ville")
