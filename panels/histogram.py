@@ -16,6 +16,11 @@ class VoteHistogram:
     def update(self, dataset, current_city=None, current_dept=None):
         """
         Met à jour les données de l'objet
+
+        Args:
+            dataset (TextFileReader): Dataset des données de l'élection
+            current_city (str): Ville à afficher
+            current_dept (str): Département à afficher
         """
         self.dataset = dataset
         self.current_city = current_city

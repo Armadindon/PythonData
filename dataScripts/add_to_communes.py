@@ -10,6 +10,13 @@ from csv import writer
 def append_missing_cities(file, city):
     """
     Ajoute la ville à la fin du csv
+
+    Args:
+        file (File): Fichier CSV
+        city (list): Liste des données à ajouter
+
+    Returns:
+        None
     """
     with open(file, encoding='utf-8', mode='a+') as write_csv:
         csv_writer = writer(write_csv)

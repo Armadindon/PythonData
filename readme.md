@@ -102,6 +102,18 @@ Ce dossier regroupe les scripts qui traitent les données.
 4. simplify_geojson: Récupére l'architecture de dossier contenant les GeoJSON et de la simplifier pour le lancement du script.
 5. xls_files_to_csv: Convertie les fichiers xls (Excel) des revenus fiscaux vers un fichier csv pour la lecture avec la librairie pandas.
 
+### Panels
+
+Ce dossier regroupe les scripts et objets représentants les différents graphiques du projet.
+
+1. election_map.py: Contient l'objet ChloroMap, une carte Chloropeth permettant d'afficher les données des élections, elle prend en entrée les deux datasets des élections (communes et départements), leurs geojsons respectifs et expose la carte via son attribut map_panel.
+2. histogram.py: Contient l'objet VoteHistogram permettant d'afficher un Histogramme avec les données de vote par commune et par candidat, l'objet gère le cas du département et de la commune, il prend en paramètre un dataset, et le numéro de la commune / département à afficher via son attribut "graph".
+3. pie.py: Contient l'objet VotePie permettant d'afficher un "Diagramme Camembert" de la répartition des votes dans une commune ou un département, il prend en paramètre un dataset et le numéro de la commune / département à afficher et expose son graphique via son attribut "graph".
+
+## Participer au projet
+
+Pour les développeurs souhaitant participer au projet / en savoir plus sur comment travailler sur le projet, merci de se référer à ![Contributing.md](Contributing.md)
+
 ### Racine
 
 1. gunicorn_conf: Fichier de configuration pour le serveur gunicorn.

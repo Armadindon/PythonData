@@ -36,7 +36,7 @@ def to_length(code, expected_length):
 def load_dept(code):
     """
     Charge le geojson d'un departement et renvoie les villes de ce departement.
-    
+
     Args:
         code (str): Chaine de caractères qui représente le code du département.
 
@@ -59,7 +59,7 @@ def generate_economic_report(dataset, code_dept=None, code_city=None):
         code_city (str): Chaine de caractère qui respresente le code de la commune.
 
     Returns:
-        html.Div: Div html pour le module dash qui represente le rapport économique de l'endroit 
+        html.Div: Div html pour le module dash qui represente le rapport économique de l'endroit
     """
     if code_dept is not None:
         line = dataset[dataset.code_departement == code_dept]
@@ -112,10 +112,10 @@ def generate_synthesis(dataset_vote_dept,
     Genère le contenu de l'onglet synthèse.
 
     Args:
-        dataset_vote_dept (TextFileReader): Set qui contient la répartition des votes du département.
-        dataset_vote_city (TextFileReader): Set qui contient la répartition des votes de la commune.
-        dataset_wealth_dept (TextFileReader): Set qui contient les données économiques du département.
-        dataset_wealth_city (TextFileReader): Set qui contient les données économiques de la commune.
+        dataset_vote_dept (TextFileReader): Set qui contient la répartition des votes du département
+        dataset_vote_city (TextFileReader): Set qui contient la répartition des votes de la commune
+        dataset_wealth_dept (TextFileReader): Set qui contient les données économiques du département
+        dataset_wealth_city (TextFileReader): Set qui contient les données économiques de la commune
     """
     city_dataset = pd.merge(dataset_vote_city, dataset_wealth_city,
                             left_on="code_insee", right_on="code_ville")

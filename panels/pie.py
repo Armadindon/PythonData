@@ -17,6 +17,11 @@ class VotePie:
     def update(self, dataset, current_city=None, current_dept=None):
         """
         Permet de mette à jour les données d'un objet
+
+        Args:
+            dataset (TextFileReader): Dataset des données de l'élection
+            current_city (str): Ville à afficher
+            current_dept (str): Département à afficher
         """
         self.dataset = dataset
         self.current_city = current_city
