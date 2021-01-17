@@ -71,6 +71,43 @@ En cliquant sur une commune, on peut accéder au "Info de la ville" maintenant d
 
 On peut aussi cliquer à tout moment sur "Synthèse de l'analyse" pour avoir les résultats de l'élection par villes et aussi par départements.
 
+## Structure du projet (Developper guide)
+
+### Assets
+
+Ce dossier contient le fichier css qui permet de changer le style et l'aspect visuel de l'application.
+
+## data
+
+Ce dossier regroupe toutes les données utilisées dans le projet.
+
+#### communes.csv et departement.csv
+
+Le premier fichier liste les informations de communes de France, l'autre liste les départements de France. Ces deux fichiers sont inclus par défaut dans le projet.
+
+#### Fichiers votes_communes.csv et votes_departements.csv
+
+Ils sont générés à l'aide de scripts qui se trouvent dans le dossier dataScripts. Mais vu que ces scripts prennent beaucoup de temps pour générer toutes les données, les 2 fichiers csv en question sont aussi inclus par défaut. Ces fichiers regroupent les résultats de l'élection présidentielle répartie par communes et départements.
+
+#### Revenus Fiscaux
+Le dossier Revenues Fiscaux contient un fichier xls pour chaque département. Grâce à un script, on génère deux fichiers csv qui répartit les revenus fiscaux par départements et communes.
+
+### dataScripts
+
+Ce dossier regroupe les scripts qui traitent les données.
+
+1. add_to_communes: Traite des cas spéciales manquants du fichier communes.csv.
+2. get_election_data_by_dept: Génère le fichier votes_départements.csv en obtenant les données de l'elections de 2017 à partir du site de gouvernement: https://www.interieur.gouv.fr/Elections/Les-resultats/Presidentielles/elecresult__presidentielle-2017/
+3. get_election_data: même fonction que le script précedent mais classe les données en fonction des communes et non pas en département dans le fichier votes_communes.csv.
+4. simplify_geojson: Récupére l'architecture de dossier contenant les GeoJSON et de la simplifier pour le lancement du script.
+5. xls_files_to_csv: Convertie les fichier xls (Excel) des revenus fiscaux vers un fichier csv pour la lecture avec la librairie pandas.
+
+### Racine
+
+1. gunicorn_conf: Fichier de configuration pour le serveur gunicorn.
+2. install: Script d'installation du projet qui installe les dépendances(données) et formatte les fichiers de la manière nécessaire.
+3. main: Fichier principal, contient toute la partie propre au fonctionnel de l'application et du serveur.
+4. requirements: Liste des des dépendances pip à installer.
 
 ## Sources :
   * [Résultats de l'élection](https://www.interieur.gouv.fr/Elections/Les-resultats/Presidentielles/elecresult__presidentielle-2017/(path)/presidentielle-2017/index.html)
