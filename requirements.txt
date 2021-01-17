@@ -1,6 +1,6 @@
 dash==1.17.0
 lxml==4.6.1
-numpy==1.19.4
+numpy==1.19.5
 pandas==1.1.4
 plotly==4.12.0
 requests==2.22.0
