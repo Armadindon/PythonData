@@ -23,15 +23,28 @@ pip install --user -r requirements.txt
 
 3. Lancez le script de récuparation des données:
 
+Sur linux:
 ```shell
 python3 install.py
+```
+
+Sur windows:
+```shell
+python install.py
 ```
 
 ![install](.readme/install_preview.png)
 
 4. Lancez l'application:
+
+Sur linux:
 ```shell
 python3 main.py
+```
+
+Sur windows:
+```shell
+python main.py
 ```
 
 ![main](.readme/main_preview.png)
