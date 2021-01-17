@@ -141,7 +141,7 @@ Cependant, on peut noter que les communes et département avec le plus haut pour
 
 On peut également noter grâce aux données géographiques que des régions proches entres elles sont plus susceptibles de voter au même parti comme on peut le voir avec la grande partie est qui a voté pour le parti Front National , et la grande partie ouest qui a voté pour le parti En Marche. Ce résultat n'était pas inclus dans l'hypothèse de base.
 
-![geo](./readme/geo_preview.png)
+![geo](.readme/geo_preview.png)
 
 
 ### Critique des résultats
