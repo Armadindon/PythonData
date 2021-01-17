@@ -8,6 +8,13 @@ def format_number_of_char(code, required_len):
     """
     Fonction utilitaire afin de mettre une chaine de caractères à
     la longueur souhaitée en ajoutant des '0' avant
+
+    Args:
+        code (str): Chaine de caractères à modifier.
+        expected_length (int): Entier représentant la longueur souhaité.
+
+    Returns:
+        str:Chaine de caractères modifié.
     """
     return "0"*(required_len-len(code)) + str(code)
 
@@ -88,6 +95,12 @@ class ChloroMap:
     def update(self, dataset, dataset_by_city, locations, city_locations):
         """
         Permet de mettre à jour les données de l'objet
+
+        Args:
+            dataset (TextFileReader): Dataset des données de l'élection
+            dataset_by_city (TextFileReader): Dataset des données de l'élection par commune
+            locations (dict): Geojson des départements à afficher
+            city_locations (dict): Geojson des communes à afficher
         """
         self.dataset = dataset
         self.dataset_by_city = dataset_by_city

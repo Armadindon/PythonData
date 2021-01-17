@@ -9,6 +9,12 @@ import xlrd
 def conversion_num_dept(code_dept):
     """
     Convertit un département au bon format
+
+    Args:
+        code_dept (str): Code du département à convertir.
+
+    Returns:
+        code_dept (str): Code département au bon format.
     """
     if code_dept[-1] == '0':
         code_dept = code_dept[:-1]

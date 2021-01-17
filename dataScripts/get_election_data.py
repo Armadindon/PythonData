@@ -14,6 +14,13 @@ def format_number_of_char(code, required_len):
     """
     Fonction utilitaire afin de mettre une chaine de caractères à
     la longueur souhaitée en ajoutant des '0' avant
+
+    Args:
+        code (str): Chaine de caractères à modifier.
+        required_len (int): Entier représentant la longueur souhaité.
+
+    Returns:
+        str: Chaine de caractères modifié.
     """
     return "0"*(required_len-len(code)) + str(code)
 
